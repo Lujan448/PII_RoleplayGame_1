@@ -8,8 +8,6 @@ using Tunics;
 
 namespace Ucu.Poo.RolePlayGame
 {
-
-
     public class Wizard
     {
        

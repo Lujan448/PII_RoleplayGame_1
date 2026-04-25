@@ -1,9 +1,11 @@
-namespace MagicStaffs
+using System.Data;
+
+namespace Spears
 {
-    public class MagicStaff
+    public class Spear
     {
         private int attackValue;
-         public int AttackValue 
+        public int AttackValue 
         { 
             get {return attackValue; } set {attackValue = value;} 
         }
@@ -14,16 +16,17 @@ namespace MagicStaffs
             get {return defenseValue; } set { defenseValue = value;}
         }
 
-        public MagicStaff(int AttackValue)
+        public Spear(int attackValue)
         {
-            this.AttackValue = AttackValue;
+            this.AttackValue = attackValue;
             this.DefenseValue = 0;
         }
 
-         public void RemoveMagicStaff()
+        //se quita la lanza dejando todos sus valores en 0
+        public void RemoveSpear()
         {
             this.AttackValue = 0;
             this.DefenseValue = 0;
         }
-    }
+    }     
 }

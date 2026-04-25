@@ -1,5 +1,8 @@
 using System;
 using System.Collections.Generic;
+using Potions;
+using PotionsInventory;
+using Spears;
 
 namespace ucudal
 {
@@ -65,9 +68,14 @@ namespace ucudal
         public void AttackOthers(Elf target, Spear spear)
         {
             target.ReceiveAttack(spear.AttackValue);
-            
         }
 
+        public void ChangeSpear(Spear newSpear)
+        {
+            this.AttackValue = newSpear.AttackValue;
+            this.DefenseValue = newSpear.DefenseValue;
+        }
+        
         public void HealCompletely() => this.Health = 100;
 
         public void ReceiveHealing(int points)
@@ -75,12 +83,12 @@ namespace ucudal
             this.Health += points; // el setter ya se encarga de no pasar de 0
         }
 
-        public void ThrowPotion(Potion potion, Elf target)
+        public void ThrowPotion(Potion potion, Elf target, PotionInventory inventory)
         {
-            if (potionInventory.Contains(potion))
+            if (inventory.HasPotion(potion))
             {
                 target.ReceiveHealing(potion.HealingPower);
-                potionInventory.Remove(potion);
+                inventory.RemovePotion(potion);
             }
         }
     }

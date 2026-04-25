@@ -80,11 +80,10 @@ namespace Ucu.Poo.RolePlayGame
             target.ReceiveAttack(staff.AttackValue);
         }
 
-        public void ChangeStaff(MagicStaff oldStaff, MagicStaff newStaff)
+        public void ChangeStaff(MagicStaff newStaff)
         {
-            this.AttackValue -= oldStaff.AttackValue;   //resta el viejo valor del bastón
-            oldStaff.RemoveMagicStaff();
-            this.AttackValue += newStaff.AttackValue;   //suma el nuevo valor del bastón
+            this.AttackValue = newStaff.AttackValue;
+            this.DefenseValue = newStaff.DefenseValue;   
         }
 
         public void ProtectWithTunic(Tunic tunic)

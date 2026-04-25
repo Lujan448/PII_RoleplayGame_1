@@ -1,0 +1,8 @@
+namespace Library;
+
+public class Bow : Item
+{
+    public Bow() : base("Bow", 20, 0)//defino el daño y la defensa del arco
+    {
+    }
+}

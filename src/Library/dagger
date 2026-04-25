@@ -1,0 +1,8 @@
+namespace Library;
+
+public class Dagger : Item
+{
+    public Dagger() : base("Dagger", 10, 2)//defino el daño y la defensa de la daga
+    {
+    }
+}

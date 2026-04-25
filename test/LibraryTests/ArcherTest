@@ -1,0 +1,117 @@
+using Xunit;
+using Library;
+
+namespace Library.Tests;
+
+public class ArcherTests
+{
+    // Verifica que el arquero se crea con 100 de vida
+    [Fact]
+    public void ArcherStartsWith100Health()
+    {
+        Archer archer = new Archer("Legolas");
+
+        Assert.Equal(100, archer.Health);
+    }
+
+    // Verifica que el arquero comienza con arco + daga
+    // Bow = 20 ataque
+    // Dagger = 10 ataque
+    // Total = 30
+    [Fact]
+    public void ArcherStartsWithCorrectAttack()
+    {
+        Archer archer = new Archer("Legolas");
+
+        Assert.Equal(30, archer.GetAttackValue());
+    }
+
+    // Verifica defensa inicial
+    // Bow = 0 defensa
+    // Dagger = 2 defensa
+    // Total = 2
+    [Fact]
+    public void ArcherStartsWithCorrectDefense()
+    {
+        Archer archer = new Archer("Legolas");
+
+        Assert.Equal(2, archer.GetDefenseValue());
+    }
+
+    // Verifica que reciba daño correctamente
+    [Fact]
+    public void ArcherReceivesDamageCorrectly()
+    {
+        Archer archer = new Archer("Legolas");
+
+        archer.ReceiveAttack(20);
+
+        // 20 - 2 = 18 daño real
+        // 100 - 18 = 82
+        Assert.Equal(82, archer.Health);
+    }
+
+    // Verifica que un arquero ataque a otro
+    [Fact]
+    public void ArcherCanAttackAnotherArcher()
+    {
+        Archer attacker = new Archer("Robin");
+        Archer defender = new Archer("Enemy");
+
+        attacker.Attack(defender);
+
+        // Ataque = 30
+        // Defensa enemigo = 2
+        // Daño real = 28
+        // Vida final = 72
+        Assert.Equal(72, defender.Health);
+    }
+
+    // Verifica que Heal recupere la vida máxima
+    [Fact]
+    public void ArcherCanHeal()
+    {
+        Archer archer = new Archer("Legolas");
+
+        archer.ReceiveAttack(50);
+        archer.Heal();
+
+        Assert.Equal(100, archer.Health);
+    }
+
+    // Verifica que la vida nunca sea menor a 0
+    [Fact]
+    public void ArcherHealthCannotBeNegative()
+    {
+        Archer archer = new Archer("Legolas");
+
+        archer.ReceiveAttack(500);
+
+        Assert.Equal(0, archer.Health);
+    }
+
+    // Verifica agregar item extra
+    [Fact]
+    public void ArcherCanAddItem()
+    {
+        Archer archer = new Archer("Legolas");
+
+        archer.AddItem(new Bow());
+
+        // 30 inicial + 20 nuevo arco = 50
+        Assert.Equal(50, archer.GetAttackValue());
+    }
+
+    // Verifica quitar item
+    [Fact]
+    public void ArcherCanRemoveItem()
+    {
+        Archer archer = new Archer("Legolas");
+        Bow extraBow = new Bow();
+
+        archer.AddItem(extraBow);
+        archer.RemoveItem(extraBow);
+
+        Assert.Equal(30, archer.GetAttackValue());
+    }
+}

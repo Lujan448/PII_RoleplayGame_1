@@ -53,7 +53,10 @@ public int Def
 
             }
         }
-
+public bool IsAlive
+        {
+            get {return this.Health > 0;}
+        }
 
 
 //constructor
@@ -70,7 +73,15 @@ public Dwarf (string name, int BaseAtk, int BaseDef)
 
 
 //metodos: recive ataque, ataque 
-public void ReceiveAtk (int enemyAtk )
+public void EquipAxe (Axe axe)
+        {
+            this.axe=axe;
+        }
+public void EquipShield (Shield shield)
+        {
+            this.shield= shield;
+        }
+public void ReceiveAttack (int enemyAtk )
         {
             int damage = enemyAtk - this.Def;
 
@@ -89,7 +100,7 @@ public void ReceiveAtk (int enemyAtk )
         }
 public void Attack (Dwarf enemy)
         {
-            enemy.ReceiveAtk(this.Atk);
+            enemy.ReceiveAttack(this.Atk);
         }
     
 }

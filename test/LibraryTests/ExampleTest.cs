@@ -1,5 +1,10 @@
 using System.Reflection;
 using NUnit.Framework;
+using SpellBooks;
+using Spells;
+using Ucu.Poo.RolePlayGame;
+using MagicStaffs;
+using Tunics;
 
 namespace Ucu.Poo.RolePlayGame.Tests
 {

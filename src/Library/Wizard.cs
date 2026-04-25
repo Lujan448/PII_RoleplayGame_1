@@ -28,11 +28,11 @@ namespace Ucu.Poo.RolePlayGame
         }
         public bool IsAlive()
         {
-            if (this.Health > 0)
-            {
-                return true;
+            if (this.Health < 0)        //En caso de que la vida sea negativa lo que hago es convertirla en 0;
+            {                           //ya que nadie tiene vida en negativo.
+                this.Health = 0;
             }
-            return false;
+            return this.Health > 0;
         }
     
         public void ReceiveAttack(int attackValue)

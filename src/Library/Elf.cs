@@ -39,7 +39,6 @@ namespace ucudal
             } 
         }
 
-        // Propiedades específicas en lugar de interfaz
 
         public Elf(string name, int attackValue, int defenseValue, int health = 100)
         {

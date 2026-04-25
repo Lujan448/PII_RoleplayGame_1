@@ -44,7 +44,7 @@ namespace Ucu.Poo.RolePlayGame.Tests
         {
             Wizard wizard = new Wizard("Nombre", 20, 10, 100);
             wizard.ReceiveAttack(5);
-            Assert.That(wizard.Health, Is.Not.EqualTo(100)); // al dar un número negativo la vida no cambia
+            Assert.That(wizard.Health, Is.EqualTo(100)); // al dar un número negativo la vida no cambia
         }
 
         [Test]

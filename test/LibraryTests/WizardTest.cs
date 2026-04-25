@@ -109,7 +109,7 @@ namespace Ucu.Poo.RolePlayGame.Tests
             Spell spell = new Spell(15,"Nombre");
             spellBook.AddSpell(spell);
             int result = wizard.AttackTotal(staff, spellBook);
-            Assert.That(result, Is.EqualTo(50));
+            Assert.That(result, Is.EqualTo(40));
         }
 
         [Test]

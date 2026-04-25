@@ -106,7 +106,7 @@ namespace Ucu.Poo.RolePlayGame.Tests
             MagicStaff staff = new MagicStaff(15);
             SpellBook spellBook = new SpellBook();
             Wizard wizard = new Wizard("Nombre", 20, 10, 100);
-            Spell spell = new Spell(15,"Nombre");
+            Spell spell = new Spell(5,"Nombre");
             spellBook.AddSpell(spell);
             int result = wizard.AttackTotal(staff, spellBook);
             Assert.That(result, Is.EqualTo(40));

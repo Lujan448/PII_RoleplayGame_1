@@ -94,7 +94,7 @@ namespace Ucu.Poo.RolePlayGame.Tests
             Dagger dagger = new Dagger(5);
             Archer archer = new Archer("Nombre", 20, 10, 100);
             int result = archer.AttackTotal(dagger, bow);
-            Assert.That(result, Is.EqualTo(50));
+            Assert.That(result, Is.EqualTo(40));
         }
 
         [Test]

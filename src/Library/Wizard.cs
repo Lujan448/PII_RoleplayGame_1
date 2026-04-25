@@ -10,26 +10,51 @@ namespace Ucu.Poo.RolePlayGame
 {
     public class Wizard
     {
-       
-        public string Name { get; set; }
-        public int AttackValue { get;set; }
-        public int DefenseValue { get;set; }
-        public int Health { get; set; }
+        private string name;
+        public string Name 
+        { 
+            get {return name; } set {name = value; } 
+        }
+
+        private int attackValue;
+        public int AttackValue 
+        { 
+            get {return attackValue; } set {attackValue = value;} 
+        }
+
+        private int defenseValue;
+        public int DefenseValue 
+        { 
+            get {return defenseValue; } set { defenseValue = value;}
+        }
+
+        private int health;
+        public int Health 
+        { 
+            get {return health; } 
+            set 
+            {
+                if (value < 0)
+                {
+                    health = 0;
+                }
+                else
+                {
+                    health = value;
+                }
+            } 
+        }
 
         //método constructor.
-        public Wizard(string Name, int AttackValue, int DefenseValue, int Health)
+        public Wizard(string name, int attackValue, int defenseValue, int health)
         {
-            this.Name = Name;
-            this.AttackValue = AttackValue;
-            this.DefenseValue = DefenseValue;
-            this.Health = Health;
+            this.Name = name;
+            this.AttackValue = attackValue;
+            this.DefenseValue = defenseValue;
+            this.Health = health;
         }
         public bool IsAlive()
         {
-            if (this.Health < 0)        //En caso de que la vida sea negativa lo que hago es convertirla en 0;
-            {                           //ya que nadie tiene vida en negativo.
-                this.Health = 0;
-            }
             return this.Health > 0;
         }
     
@@ -39,10 +64,6 @@ namespace Ucu.Poo.RolePlayGame
             if (damage > 0) 
             {
                 this.Health -= damage;
-            }
-            else if (this.Health < 0) 
-            {
-                this.Health = 0;
             }
         }
 
@@ -61,8 +82,9 @@ namespace Ucu.Poo.RolePlayGame
 
         public void ChangeStaff(MagicStaff oldStaff, MagicStaff newStaff)
         {
+            this.AttackValue -= oldStaff.AttackValue;   //resta el viejo valor del bastón
             oldStaff.RemoveMagicStaff();
-            this.AttackValue += newStaff.AttackValue;   
+            this.AttackValue += newStaff.AttackValue;   //suma el nuevo valor del bastón
         }
 
         public void ProtectWithTunic(Tunic tunic)

@@ -1,6 +1,6 @@
-namespace MagicStaffs
+namespace Library
 {
-    public class MagicStaff
+    public class Bow
     {
         private int attackValue;
          public int AttackValue 
@@ -14,18 +14,23 @@ namespace MagicStaffs
             get {return defenseValue; } set { defenseValue = value;}
         }
 
-        public MagicStaff(int AttackValue)
+
+        public Bow(int AttackValue)
         {
             this.AttackValue = AttackValue;
             this.DefenseValue = 0;
         }
 
-         public void RemoveMagicStaff()
+         public void RemoveBow()
         {
             if(this.AttackValue > 0)
             {
                 this.AttackValue = 0;
             }
         }
+        
     }
+    
 }
+
+

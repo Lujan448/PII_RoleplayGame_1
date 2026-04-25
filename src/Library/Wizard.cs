@@ -46,7 +46,7 @@ namespace Ucu.Poo.RolePlayGame
         }
 
         //método constructor.
-        public Wizard(string name, int attackValue, int defenseValue, int health)
+        public Wizard(string name, int attackValue, int defenseValue, int health = 100)
         {
             this.Name = name;
             this.AttackValue = attackValue;

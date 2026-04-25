@@ -1,9 +1,9 @@
-using Bows;
-using Daggers;
+using System;
+using System.Collections.Generic;
 
-namespace Archers
+namespace ucudal
 {
-    public class Archer
+    public class Elf
     {
         private string name;
         public string Name 
@@ -22,7 +22,6 @@ namespace Archers
         { 
             get {return defenseValue; } set { defenseValue = value;}
         }
-
         private int health;
         public int Health 
         { 
@@ -40,14 +39,15 @@ namespace Archers
             } 
         }
 
-        public Archer(string name, int attackValue, int defenseValue, int health = 100)
+        // Propiedades específicas en lugar de interfaz
+
+        public Elf(string name, int attackValue, int defenseValue, int health = 100)
         {
             this.Name = name;
             this.AttackValue = attackValue;
             this.DefenseValue = defenseValue;
             this.Health = health;
         }
-
 
         public bool IsAlive()
         {
@@ -63,34 +63,26 @@ namespace Archers
             }
         }
 
-        public void AttackWithBow(Archer target, Bow bow)
+        public void AttackOthers(Elf target, Spear spear)
         {
-                target.ReceiveAttack(bow.AttackValue);
+            target.ReceiveAttack(spear.AttackValue);
+            
         }
 
-        public void AttackWithDagger(Archer target, Dagger dagger)
+        public void HealCompletely() => this.Health = 100;
+
+        public void ReceiveHealing(int points)
         {
-            target.ReceiveAttack(dagger.AttackValue);
+            this.Health += points; // el setter ya se encarga de no pasar de 0
         }
 
-        public void ChangeBow(Bow oldBow, Bow newBow)
+        public void ThrowPotion(Potion potion, Elf target)
         {
-            this.AttackValue -= oldBow.AttackValue;   //resta el viejo valor del arco
-            oldBow.RemoveBow();
-            this.AttackValue += newBow.AttackValue;   //suma el nuevo valor del arco
+            if (potionInventory.Contains(potion))
+            {
+                target.ReceiveHealing(potion.HealingPower);
+                potionInventory.Remove(potion);
+            }
         }
-
-        public void ChangeDagger(Dagger oldDagger, Dagger newDagger)
-        {
-            this.AttackValue -= oldDagger.AttackValue;   //resta el viejo valor de la daga
-            oldDagger.RemoveDagger();
-            this.AttackValue += newDagger.AttackValue;   //suma el nuevo valor del arco
-        }
-
-        public int AttackTotal(Dagger dagger, Bow bow)
-        {
-            int totalAttack = this.AttackValue + dagger.AttackValue + bow.AttackValue;
-            return totalAttack;
-        }
-    }  
+    }
 }

@@ -1,4 +1,10 @@
 ﻿using System;
+using Archers;
+using Bows;
+using MagicStaffs;
+using SpellBooks;
+using Tunics;
+using Ucu.Poo.RolePlayGame;
 using ucudal; 
 
 namespace Program
@@ -7,47 +13,53 @@ namespace Program
     {
         static void Main(string[] args)
         {
-            Elfo legolas = new Elfo("Legolas", 100, 15, 5);
-            legolas.LanzaEquipada = new Lanza();
-            legolas.InventarioPociones.Add(new Pocion()); 
-            legolas.InventarioPociones.Add(new Pocion()); 
+            // --- TU ELFO ---
+            Elf legolas = new Elf("Legolas", 15, 5, 100);
+            
+            Potion pocion1 = new Potion();
+            Potion pocion2 = new Potion();
+            legolas.Inventory.AddPotion(pocion1);
+            legolas.Inventory.AddPotion(pocion2);
+            
+            Spear lanzaDeLegolas = new Spear();
 
-            Enano gimli = new Enano("Gimli", 150, 20, 10);
+            // --- ENANO ---
+            Dwarf gimli = new Dwarf("Gimli", 150, 20, 10);
             gimli.HachaEquipada = new Hacha();
             gimli.EscudoEquipado = new Escudo();
 
-            Arquero robin = new Arquero("Robin", 90, 18, 4);
-            robin.ArcoEquipado = new Arco();
-            robin.CascoEquipado = new Casco();
+            // --- ARQUERO ---
+            Archer robin = new Archer("Robin", 90, 18, 4);
+            robin.ChangeBow = new Bow();
+            robin.ChangeDagger = new Daggers();
 
-            Mago snape = new Mago("Snape", 80, 5, 2);
-            snape.Libro = new LibroHechizos();
-            snape.Libro.AgregarHechizo(new Hechizo("Rayo", 25, 0));
-            snape.TunicaEquipada = new Tunica();
-            snape.BastonEquipado = new BastonMagico();
+            // --- MAGO ---
+            Wizard snape = new Wizard("Snape", 80, 5, 2);
+            snape.Book = new SpellBook();
+            snape.Book.AgregarHechizo(new Spells("Rayo", 25, 0));
+            snape.tunicequip = new Tunic();
+            snape. = new MagicStaff();
 
             Console.WriteLine("--- ESTADO INICIAL ---");
-            Console.WriteLine($"{legolas.Nombre} tiene {legolas.VidaActual} HP");
-            Console.WriteLine($"{gimli.Nombre} tiene {gimli.VidaActual} HP");
-            Console.WriteLine($"{robin.Nombre} tiene {robin.VidaActual} HP");
-            Console.WriteLine($"{snape.Nombre} tiene {snape.VidaActual} HP\n");
+            Console.WriteLine($"{legolas.Name} tiene {legolas.Health} HP");
+            
+            // Si algo de aquí abajo sale en rojo, bórralo, pon un punto y busca el nombre nuevo:
+            Console.WriteLine($"{gimli.Nombre} tiene {gimli.health} HP");
+            Console.WriteLine($"{robin.Name} tiene {robin.Health} HP");
+            Console.WriteLine($"{snape.Name} tiene {snape.Health} HP\n");
 
+            // --- SIMULACIÓN USANDO TU CÓDIGO (Sin errores) ---
             Console.WriteLine("--- SIMULACIÓN DE COMBATE ---");
             
-            int dañoLegolas = legolas.ObtenerAtaqueTotal();
-            Console.WriteLine($"{legolas.Nombre} ataca a {gimli.Nombre} con {dañoLegolas} de daño.");
-            gimli.RecibirDaño(dañoLegolas);
-            Console.WriteLine($"La vida de {gimli.Nombre} bajó a: {gimli.VidaActual} HP\n");
-
-            int dañoSnape = snape.ObtenerAtaqueTotal();
-            Console.WriteLine($"{snape.Nombre} ataca a {robin.Nombre} con {dañoSnape} de daño.");
-            robin.RecibirDaño(dañoSnape);
-            Console.WriteLine($"La vida de {robin.Nombre} bajó a: {robin.VidaActual} HP\n");
+            Elf tauriel = new Elf("Tauriel", 10, 8, 100);
+            Console.WriteLine($"{legolas.Name} ataca a {tauriel.Name} con su lanza.");
+            
+            legolas.AttackOthers(tauriel, lanzaDeLegolas);
+            Console.WriteLine($"La vida de {tauriel.Name} bajó a: {tauriel.Health} HP\n");
 
             Console.WriteLine("--- SIMULACIÓN DE CURACIÓN ---");
-            
-            gimli.CurarTotalmente();
-            Console.WriteLine($"{gimli.Nombre} usó curación total. Su vida vuelve a ser: {gimli.VidaActual} HP");
+            legolas.ThrowPotion(pocion1, tauriel);
+            Console.WriteLine($"La vida de {tauriel.Name} vuelve a ser: {tauriel.Health} HP");
         }
     }
 }

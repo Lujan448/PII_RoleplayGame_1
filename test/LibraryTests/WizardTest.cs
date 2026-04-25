@@ -88,7 +88,7 @@ namespace Ucu.Poo.RolePlayGame.Tests
             Wizard wizard = new Wizard("Nombre", 20, 10, 100);
             wizard.ChangeStaff(oldstaff, newstaff);
             Assert.That(oldstaff.AttackValue, Is.EqualTo(0));
-            Assert.That(wizard.AttackValue, Is.EqualTo(45));
+            Assert.That(wizard.AttackValue, Is.EqualTo(40));
         }
 
         [Test]

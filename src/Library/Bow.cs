@@ -1,4 +1,4 @@
-namespace Library
+namespace Bows
 {
     public class Bow
     {
@@ -28,9 +28,7 @@ namespace Library
                 this.AttackValue = 0;
             }
         }
-        
-    }
-    
+    } 
 }
 
 

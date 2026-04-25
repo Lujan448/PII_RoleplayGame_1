@@ -1,4 +1,4 @@
-namespace Library
+namespace Daggers
 {
     public class Dagger
     {

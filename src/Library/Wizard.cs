@@ -94,7 +94,7 @@ namespace Ucu.Poo.RolePlayGame
 
         public int AttackTotal(MagicStaff staff, SpellBook book)
         {
-            int totalSpellAttack = book.SpellList.Sum(spell => spell.AttackValue);
+            int totalSpellAttack = book.TotalSpellAttack();
             int totalAttack = this.AttackValue + staff.AttackValue + totalSpellAttack;
             return totalAttack;
         }

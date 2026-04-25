@@ -2,9 +2,24 @@ namespace Spells
 {
     public class Spell
     {
-        public int AttackValue {get ; set; }
-        public int DefenseValue {get; set; }
-        public string Name { get; set;}
+        private int attackValue;
+        public int AttackValue 
+        {
+            get {return attackValue; }
+            set {attackValue = value;} 
+        }
+
+        private int defenseValue;
+        public int DefenseValue 
+        {
+            get {return defenseValue; } set {defenseValue = value; } 
+        }
+
+        private string name;
+        public string Name 
+        { 
+            get {return name; } set {name = value;}
+        }
 
         public Spell(int AttackValue, string Name)
         {

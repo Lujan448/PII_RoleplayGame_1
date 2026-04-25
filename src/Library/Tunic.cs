@@ -2,8 +2,18 @@ namespace Tunics
 {
     public class Tunic
     {
-        public int AttackValue {get ; set; }
-        public int DefenseValue {get; set; }
+        private int attackValue;
+        public int AttackValue 
+        {
+            get {return attackValue; }
+            set {attackValue = value;} 
+        }
+
+        private int defenseValue;
+        public int DefenseValue 
+        {
+            get {return defenseValue; } set {defenseValue = value; } 
+        }
 
         public Tunic(int DefenseValue)
         {

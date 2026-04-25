@@ -5,15 +5,26 @@ namespace SpellBooks
 {
     public class SpellBook
     {
-        public List<Spell> SpellList = new List<Spell>();
+        private List<Spell> spellList = new List<Spell>();
+
         public void AddSpell(Spell spell)
         {
-            this.SpellList.Add(spell);
+            this.spellList.Add(spell);
         }
 
         public bool HasSpell(Spell spell)
         {
-            return SpellList.Contains(spell);
+            return spellList.Contains(spell);
+        }
+
+        public int TotalSpellAttack()
+        {
+            int total = 0;
+            foreach (Spell spell in spellList)
+            {
+                total += spell.AttackValue;
+            }
+            return total;
         }
     }
 }

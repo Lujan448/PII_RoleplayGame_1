@@ -40,7 +40,7 @@ namespace Archers
             } 
         }
 
-        public Archer(string name, int attackValue, int defenseValue, int health)
+        public Archer(string name, int attackValue, int defenseValue, int health = 100)
         {
             this.Name = name;
             this.AttackValue = attackValue;

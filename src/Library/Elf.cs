@@ -1,4 +1,8 @@
 using System;
+<<<<<<< HEAD
+=======
+using System.Collections.Generic;
+>>>>>>> 5540056b7ff63c2156966a24b98c10b364fcf179
 
 namespace ucudal
 {
@@ -21,7 +25,10 @@ namespace ucudal
         { 
             get {return defenseValue; } set { defenseValue = value;}
         }
+<<<<<<< HEAD
 
+=======
+>>>>>>> 5540056b7ff63c2156966a24b98c10b364fcf179
         private int health;
         public int Health 
         { 
@@ -39,11 +46,14 @@ namespace ucudal
             } 
         }
 
+<<<<<<< HEAD
       
         public int MaxHealth { get; private set; }
 
     
         public PotionInventory Inventory { get; set; }
+=======
+>>>>>>> 5540056b7ff63c2156966a24b98c10b364fcf179
 
         public Elf(string name, int attackValue, int defenseValue, int health = 100)
         {
@@ -51,10 +61,13 @@ namespace ucudal
             this.AttackValue = attackValue;
             this.DefenseValue = defenseValue;
             this.Health = health;
+<<<<<<< HEAD
             this.MaxHealth = health; 
             
         
             this.Inventory = new PotionInventory(); 
+=======
+>>>>>>> 5540056b7ff63c2156966a24b98c10b364fcf179
         }
 
         public bool IsAlive()
@@ -73,6 +86,7 @@ namespace ucudal
 
         public void AttackOthers(Elf target, Spear spear)
         {
+<<<<<<< HEAD
        
             int totalDamage = this.AttackValue + spear.AttackValue;
             target.ReceiveAttack(totalDamage);
@@ -88,16 +102,34 @@ namespace ucudal
             {
                 this.Health = this.MaxHealth;
             }
+=======
+            target.ReceiveAttack(spear.AttackValue);
+            
+        }
+
+        public void HealCompletely() => this.Health = 100;
+
+        public void ReceiveHealing(int points)
+        {
+            this.Health += points; // el setter ya se encarga de no pasar de 0
+>>>>>>> 5540056b7ff63c2156966a24b98c10b364fcf179
         }
 
         public void ThrowPotion(Potion potion, Elf target)
         {
+<<<<<<< HEAD
            
             if (this.Inventory.Contains(potion))
             {
                 target.ReceiveHealing(potion.HealingPower);
                 this.Inventory.RemovePotion(potion);
                 Console.WriteLine($"{this.Name} threw a potion at {target.Name}.");
+=======
+            if (potionInventory.Contains(potion))
+            {
+                target.ReceiveHealing(potion.HealingPower);
+                potionInventory.Remove(potion);
+>>>>>>> 5540056b7ff63c2156966a24b98c10b364fcf179
             }
         }
     }

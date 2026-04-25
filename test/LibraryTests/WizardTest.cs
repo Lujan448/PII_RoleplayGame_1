@@ -8,7 +8,8 @@ using Tunics;
 
 namespace Ucu.Poo.RolePlayGame.Tests
 {
-    public class TestClass
+    [TestFixture]
+    public class WizardTest
     {
         [Test]
         public void IsNameCorrect()

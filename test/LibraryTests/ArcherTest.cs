@@ -6,6 +6,7 @@ using Daggers;
 
 namespace Ucu.Poo.RolePlayGame.Tests
 {
+    [TestFixture]
     public class ArcherTest
     {
         [Test]

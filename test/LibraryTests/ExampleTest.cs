@@ -27,7 +27,7 @@ namespace Ucu.Poo.RolePlayGame.Tests
         [Test]
         public void IsNotAliveCorrect()
         {
-            Wizard wizard = new Wizard("Nombre", 20, 10, 100);
+            Wizard wizard = new Wizard("Nombre", 20, 10, 0);
             Assert.That(wizard.IsAlive(), Is.False);
         }
 
@@ -53,7 +53,7 @@ namespace Ucu.Poo.RolePlayGame.Tests
             Wizard target = new Wizard("Nombre", 30, 5, 100);
             Wizard wizard = new Wizard("Nombre", 20, 10, 100);
             SpellBook spellList = new SpellBook();
-            Spell spell = new Spell(15, 5, "Nombre");
+            Spell spell = new Spell(15,"Nombre");
             spellList.AddSpell(spell);
             wizard.AttackOthers(target, spellList, spell);
             Assert.That(target.Health, Is.EqualTo(90));
@@ -65,7 +65,7 @@ namespace Ucu.Poo.RolePlayGame.Tests
             Wizard target = new Wizard("Nombre", 30, 5, 100);
             Wizard wizard = new Wizard("Nombre", 20, 10, 100);
             SpellBook spellList = new SpellBook();
-            Spell spell = new Spell(15, 5, "Nombre");
+            Spell spell = new Spell(15, "Nombre");
             wizard.AttackOthers(target, spellList, spell);
             Assert.That(target.Health, Is.EqualTo(100));   //al no existir un spell en la lista, la vida queda igual
         }

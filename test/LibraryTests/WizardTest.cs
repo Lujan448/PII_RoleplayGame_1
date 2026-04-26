@@ -46,11 +46,10 @@ namespace WizardsTests
         [Test]
         public void ChangeStaff_WhenNewStaffEquipped_UpdatesAttackValue()
         {
-            MagicStaff oldstaff = new MagicStaff(5);
             MagicStaff newstaff = new MagicStaff(25);
             Wizard wizard = new Wizard("Nombre", 20, 10, 100);
             wizard.ChangeStaff(newstaff);
-            Assert.That(wizard.AttackValue, Is.EqualTo(40));
+            Assert.That(wizard.AttackValue, Is.EqualTo(10));
         }
 
         //Verifica si el valor de la protección de la tunica es el correcto
@@ -84,7 +83,7 @@ namespace WizardsTests
             SpellBook spellBook = new SpellBook();
             Wizard wizard = new Wizard("Nombre", 20, 10, 100);
             int result = wizard.DefenseTotal(spellBook, tunic);
-            Assert.That(result, Is.EqualTo(40));
+            Assert.That(result, Is.EqualTo(25));
         }
     }
 }

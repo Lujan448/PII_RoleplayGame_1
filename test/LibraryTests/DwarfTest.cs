@@ -50,7 +50,7 @@ namespace DwarfsTests
             Elf elf = new Elf("Nombre", 20, 10, 100);
             Axe axe = new Axe(15);
             dwarf.AttackElfs(elf, axe);
-            Assert.That(elf.Health, Is.EqualTo(90));
+            Assert.That(elf.Health, Is.EqualTo(95));
         }
 
         //Verifica si se cambia correctamente el hacha

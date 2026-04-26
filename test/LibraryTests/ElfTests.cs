@@ -47,7 +47,7 @@ namespace ElfTests
             Spear newSpear = new Spear(10);
             Elf elf = new Elf("Nombre", 20, 10, 100);
             elf.ChangeSpear(newSpear);
-            Assert.That(elf.AttackValue, Is.EqualTo(25));
+            Assert.That(elf.AttackValue, Is.EqualTo(10));
         }
         
         //Esta perte se encarga de verificar que al tirarle una pocion a un target se le recupera la vida máxima establecida

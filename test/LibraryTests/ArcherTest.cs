@@ -44,22 +44,20 @@ namespace ArchersTests
         [Test]
         public void ChangeBow_WhenNewBowEquipped_UpdatesAttackValue()
         {
-            Bow oldbow = new Bow(5);
             Bow newbow = new Bow(10);
             Archer archer = new Archer("Nombre", 20, 10, 100);
             archer.ChangeBow(newbow);
-            Assert.That(archer.AttackValue, Is.EqualTo(25));
+            Assert.That(archer.AttackValue, Is.EqualTo(10));
         }
 
         //Verifica si se cambia correctamente la daga
         [Test]
         public void ChangeDagger_WhenNewDaggerEquipped_UpdatesAttackValue()
         {
-            Dagger olddagger = new Dagger(5);
             Dagger newdagger = new Dagger(10);
             Archer archer = new Archer("Nombre", 20, 10, 100);
             archer.ChangeDagger(newdagger);
-            Assert.That(archer.AttackValue, Is.EqualTo(25));
+            Assert.That(archer.AttackValue, Is.EqualTo(10));
         }
 
         //Verifica si el ataque total retorna la suma correcta

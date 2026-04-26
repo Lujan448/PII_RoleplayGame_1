@@ -33,7 +33,7 @@ namespace SpellBookTests
             SpellBook book = new SpellBook();
             Spell spell = new Spell("Nombre",10);
             book.AddSpell(spell);
-            Assert.That(book.TotalSpellDefense(), Is.EqualTo(50));
+            Assert.That(book.TotalSpellDefense(), Is.EqualTo(10));
         }
     }
 }

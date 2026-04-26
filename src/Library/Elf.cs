@@ -4,7 +4,7 @@ using Potions;
 using PotionsInventory;
 using Spears;
 
-namespace ucudal
+namespace Elfs
 {
     public class Elf
     {

@@ -1,13 +1,14 @@
 using System;
 using System.Collections.Generic;
-using Potions;
-using PotionsInventory;
-using Spears;
 
+//Es la clase Experta, ya que se encarga de conocer todas las responsabilidades que tiene Elf
+//y los comportamientos que va a realizar son a partir del conocimiento de cada una de estas responsabilidades.
 namespace Elfs
 {
     public class Elf
     {
+        //Iniciamos cada uno de las responsabiliades de conocer a la clase Elf.
+        //Su nombre, valor de ataque, de defensa y su vida.
         private string name;
         public string Name 
         { 
@@ -26,6 +27,8 @@ namespace Elfs
             get {return defenseValue; } set { defenseValue = value;}
         }
 
+        //En este caso agregamos un máximo de vida ya que nosotros entendimos por la letra de que debe existir un limite
+        //en la vida, más que nada cuando se aplican en algún punto las curaciones, no podes tener más de 100.
         private int maxHealth;
         private int health;
         public int Health 
@@ -48,7 +51,7 @@ namespace Elfs
             } 
         }
 
-
+        //Agregamos el constructor
         public Elf(string name, int attackValue, int defenseValue, int health = 100)
         {
             this.Name = name;
@@ -58,11 +61,13 @@ namespace Elfs
             this.maxHealth = health;
         }
 
+        //Nos pareció bueno verificar si el personaje estaba vivo, en caso de que lo este devuelve un valor booleano.
         public bool IsAlive()
         {
             return this.Health > 0;
         }
     
+        //Este método lo que va a realizar es que este personaje puede recibir ataque de otro.
         public void ReceiveAttack(int attackValue)
         {
             int damage = attackValue - this.DefenseValue;
@@ -72,11 +77,28 @@ namespace Elfs
             }
         }
 
+        //En el siguiente método lo que se hace es poder cambiar el arma que tienen por uno nuevo
+        //En este caso lo pusimos en esta clase porque nos parecia que era la Experta de la información para poder realizar
+        //las responsabilidades correspondientes y además porque por más que la clase Spear de manera individual puede
+        //cumplir con estas responsabilidades, logicamente no tiene sentido, no se cambia un item solo,
+        //es el personaje el que cambia el item por otro.
         public void ChangeSpear(Spear newSpear)
         {
             this.AttackValue = newSpear.AttackValue;
         }
+
+        //En el siguiente método lo que se hace es poder remover el arma que tiene
+        //En este caso lo pusimos en esta clase porque nos parecia que era la Experta de la información para poder realizar
+        //las responsabilidades correspondientes y además porque por más que las clase Spear de manera individual puede
+        //cumplir con estas responsabilidades, logicamente no tiene sentido, no se saca un item solo,
+        //es el personaje el que saca el item.
+        public void RemoveSpear()
+        {
+            this.AttackValue = 0;
+            this.DefenseValue = 0;
+        }
         
+        //Es el método que tiene la responsabilidad de devolver la vida completa a un personaje
         public void HealCompletely() => this.Health = maxHealth;
 
         //Es el encargado de curar a alguien y que le quede su vida inicial

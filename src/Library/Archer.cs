@@ -1,7 +1,6 @@
 //Es la clase Experta, ya que se encarga de conocer todas las responsabilidades que tiene Archer 
 //y los comportamientos que va a realizar son a partir del conocimiento de cada una de estas responsabilidades.
 
-
 namespace Archers
 {
     public class Archer
@@ -79,7 +78,7 @@ namespace Archers
         //En los siguientes dos métodos lo que se hace es poder cambiar el arma que tienen por uno nuevo
         //En este caso lo pusimos en esta clase porque nos parecia que era la Experta de la información para poder realizar
         //las responsabilidades correspondientes y además porque por más que las clase Bow o Dagger de manera individual pueden 
-        //cumplir con estas responsabilidades, pasa que logicamente no tiene sentido, no se cambia un item solo,
+        //cumplir con estas responsabilidades, pero logicamente no tiene sentido, no se cambia un item solo,
         //es el personaje el que cambia el item por otro.
         public void ChangeBow(Bow newBow)
         {
@@ -94,7 +93,7 @@ namespace Archers
         //En los siguientes dos métodos lo que se hace es poder remover el arma que tiene
         //En este caso lo pusimos en esta clase porque nos parecia que era la Experta de la información para poder realizar
         //las responsabilidades correspondientes y además porque por más que las clase Bow o Dagger de manera individual pueden 
-        //cumplir con estas responsabilidades, pasa que logicamente no tiene sentido, no se saca un item solo,
+        //cumplir con estas responsabilidades, pero logicamente no tiene sentido, no se saca un item solo,
         //es el personaje el que saca el item.
         public void RemoveDagger()
         {

@@ -1,7 +1,11 @@
+//Es la clase experta de la información que corresponde a los hechizos
+
 namespace Spells
 {
     public class Spell
     {
+        //Se inicializan aquellas responsabilidades de conocer de la clase Axe
+        //Valor de nombre, ataque y de defensa.
         private int attackValue;
         public int AttackValue 
         {
@@ -21,6 +25,10 @@ namespace Spells
             get {return name; } set {name = value;}
         }
 
+        //Ceamos al constructor 
+        //En este caso no en ni un arma ni una armadura, sin embargo el valor de defensa es fundamental para
+        // el progreso.
+        // En el caso del valor de ataque va a ser 0.
         public Spell(string Name, int DefenseValue)
         {
             this.AttackValue = 0;

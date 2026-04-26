@@ -1,7 +1,11 @@
-namespace Potions
+//Es la clase experta de la información que corresponde a las pociones
+
+namespace Elfs
 {
     public class Potion
     {
+        //Se inicializan aquellas responsabilidades de conocer de la clase Potion
+        //Valor de nombre, poder de curación, ataque y de defensa.
         private int attackValue;
         public int AttackValue 
         {
@@ -27,6 +31,8 @@ namespace Potions
             get {return healingPower; } set {healingPower = value;}
         }
 
+        //Ceamos al constructor 
+        //En este caso como no es ni un arma ni una armadura, sus valores de defensa y ataque van a ser 0.
         public Potion(string name, int healingPower)
         {
             this.AttackValue = 0;

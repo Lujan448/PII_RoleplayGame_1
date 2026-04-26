@@ -93,7 +93,7 @@ namespace Dwarfs
         //En los siguientes dos métodos lo que se hace es poder cambiar el arma que tienen por uno nuevo
         //En este caso lo pusimos en esta clase porque nos parecia que era la Experta de la información para poder realizar
         //las responsabilidades correspondientes y además porque por más que las clase Axe o Shield de manera individual pueden 
-        //cumplir con estas responsabilidades, pasa que logicamente no tiene sentido, no se cambia un item solo,
+        //cumplir con estas responsabilidades, logicamente no tiene sentido, no se cambia un item solo,
         //es el personaje el que cambia el item por otro.
         public void ChangeAxe(Axe newAxe)
         {
@@ -109,7 +109,7 @@ namespace Dwarfs
         //En los siguientes dos métodos lo que se hace es poder remover el arma que tiene
         //En este caso lo pusimos en esta clase porque nos parecia que era la Experta de la información para poder realizar
         //las responsabilidades correspondientes y además porque por más que las clase Axe o Shield de manera individual pueden 
-        //cumplir con estas responsabilidades, pasa que logicamente no tiene sentido, no se saca un item solo,
+        //cumplir con estas responsabilidades, logicamente no tiene sentido, no se saca un item solo,
         //es el personaje el que saca el item.
         public void RemoveAxe()
         {

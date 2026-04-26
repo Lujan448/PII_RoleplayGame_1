@@ -1,53 +1,87 @@
 ﻿using System;
-using ucudal; 
+using Archers;
+using Elfs;
+using Dwarfs;
+using Wizards;
+using Spells;
 
+
+//Es el Main, es el que se va a encargar de crear los objetos y probar los comportamientos de cada clase.
 namespace Program
 {
     class Program
     {
         static void Main(string[] args)
         {
-            Elfo legolas = new Elfo("Legolas", 100, 15, 5);
-            legolas.LanzaEquipada = new Lanza();
-            legolas.InventarioPociones.Add(new Pocion()); 
-            legolas.InventarioPociones.Add(new Pocion()); 
+            //Elf
+            Elf legolas = new Elf("Legolas", 15, 5);
+            Potion potion = new Potion("Healing", 10);
+            PotionInventory inventory = new PotionInventory();
+            inventory.AddPotion(potion);
+            Spear spear = new Spear(10);
+            legolas.ChangeSpear(spear);
 
-            Enano gimli = new Enano("Gimli", 150, 20, 10);
-            gimli.HachaEquipada = new Hacha();
-            gimli.EscudoEquipado = new Escudo();
 
-            Arquero robin = new Arquero("Robin", 90, 18, 4);
-            robin.ArcoEquipado = new Arco();
-            robin.CascoEquipado = new Casco();
+            //Dwarf
+            Dwarf gimli = new Dwarf("Gimli", 20, 10);
+            Axe axe = new Axe(17);
+            Shield shield = new Shield(12);
+            gimli.ChangeAxe(axe);
+            gimli.ChangeShield(shield);
 
-            Mago snape = new Mago("Snape", 80, 5, 2);
-            snape.Libro = new LibroHechizos();
-            snape.Libro.AgregarHechizo(new Hechizo("Rayo", 25, 0));
-            snape.TunicaEquipada = new Tunica();
-            snape.BastonEquipado = new BastonMagico();
+
+            //Archer
+            Archer robin = new Archer("Robin", 18, 4);
+            Bow bow = new Bow(16);
+            Dagger dagger = new Dagger(5);
+            robin.ChangeBow(bow);
+            robin.ChangeDagger(dagger); 
+
+            
+            //Wizard
+            Wizard snape = new Wizard("Snape", 5, 2);
+            Spell spell = new Spell("Defense", 15);
+            SpellBook book = new SpellBook();
+            book.AddSpell(spell);
+            MagicStaff staff = new MagicStaff(20);
+            snape.ChangeStaff(staff);
+            Tunic tunic = new Tunic(15);
+            snape.ChangeTunic(tunic);
+            
 
             Console.WriteLine("--- ESTADO INICIAL ---");
-            Console.WriteLine($"{legolas.Nombre} tiene {legolas.VidaActual} HP");
-            Console.WriteLine($"{gimli.Nombre} tiene {gimli.VidaActual} HP");
-            Console.WriteLine($"{robin.Nombre} tiene {robin.VidaActual} HP");
-            Console.WriteLine($"{snape.Nombre} tiene {snape.VidaActual} HP\n");
+            Console.WriteLine($"{legolas.Name} tiene {legolas.Health} HP");
+            
+
+            Console.WriteLine($"{gimli.Name} tiene {gimli.Health} HP");
+            Console.WriteLine($"{robin.Name} tiene {robin.Health} HP");
+            Console.WriteLine($"{snape.Name} tiene {snape.Health} HP\n");
+
+        
+            //Nosotros queríamos que se pelearan unos entre otros, por ejemplo que el dwarf se pelee con el archer, pero
+            //teníamos que crear un método para cada uno y hasta capaz la sobrecarga del método y no nos parecía lo mejor, solo agregamos aquellos métodos 
+            //y las pruebas correspondientes para ellos para que se viera el funcionamiento y cumplimiento de la letra.
 
             Console.WriteLine("--- SIMULACIÓN DE COMBATE ---");
-            
-            int dañoLegolas = legolas.ObtenerAtaqueTotal();
-            Console.WriteLine($"{legolas.Nombre} ataca a {gimli.Nombre} con {dañoLegolas} de daño.");
-            gimli.RecibirDaño(dañoLegolas);
-            Console.WriteLine($"La vida de {gimli.Nombre} bajó a: {gimli.VidaActual} HP\n");
-
-            int dañoSnape = snape.ObtenerAtaqueTotal();
-            Console.WriteLine($"{snape.Nombre} ataca a {robin.Nombre} con {dañoSnape} de daño.");
-            robin.RecibirDaño(dañoSnape);
-            Console.WriteLine($"La vida de {robin.Nombre} bajó a: {robin.VidaActual} HP\n");
+            Elf dobby = new Elf("Dooby", 2, 5);
+            //El duende se va a encargar de atacar al elfo
+            gimli.AttackElfs(dobby, axe);
+            Console.WriteLine($"La vida de {dobby.Name} bajó a: {dobby.Health} HP\n");
 
             Console.WriteLine("--- SIMULACIÓN DE CURACIÓN ---");
-            
-            gimli.CurarTotalmente();
-            Console.WriteLine($"{gimli.Nombre} usó curación total. Su vida vuelve a ser: {gimli.VidaActual} HP");
+            //El elfo Legolas se va a encargar de curar al elfo Dobby
+            legolas.ThrowPotion(potion, dobby, inventory);
+            Console.WriteLine($"La vida de {dobby.Name} vuelve a ser: {dobby.Health} HP\n");
+
+            //Lo que va a mostrar es el resultado total del ataque
+            Console.WriteLine("--- TOTAL DE VALOR DE ATAQUE ---");
+            int totalAttack = robin.AttackTotal(dagger, bow);
+            Console.WriteLine($"El valor de ataque total que tiene {robin.Name} es: {totalAttack}");
+
+            //Lo que va a mostrar es el resultado total de la defensa
+            Console.WriteLine("--- TOTAL DE VALOR DE DEFENSA ---");
+            int totalDefense = snape.DefenseTotal(book, tunic);
+            Console.WriteLine($"El valor de defensa total que tiene {snape.Name} es: {totalDefense}");
         }
     }
-}
+} 

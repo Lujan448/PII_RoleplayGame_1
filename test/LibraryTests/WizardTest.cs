@@ -49,7 +49,7 @@ namespace WizardsTests
             MagicStaff newstaff = new MagicStaff(25);
             Wizard wizard = new Wizard("Nombre", 20, 10, 100);
             wizard.ChangeStaff(newstaff);
-            Assert.That(wizard.AttackValue, Is.EqualTo(10));
+            Assert.That(wizard.AttackValue, Is.EqualTo(25));
         }
 
         //Verifica si el valor de la protección de la tunica es el correcto

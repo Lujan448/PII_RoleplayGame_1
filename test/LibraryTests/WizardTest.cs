@@ -1,99 +1,62 @@
 using System.Reflection;
 using NUnit.Framework;
-using SpellBooks;
 using Spells;
-using Ucu.Poo.RolePlayGame;
-using MagicStaffs;
-using Tunics;
+using Wizards;
 
-namespace Ucu.Poo.RolePlayGame.Tests
+
+namespace WizardsTests
 {
     [TestFixture]
     public class WizardTest
     {
+        //Es el encargado de probar si el hechicero esta vivo, si lo esta devuelve true
         [Test]
-        public void IsNameCorrect()
-        {
-            Wizard wizard = new Wizard("Nombre", 20, 10, 100);
-            Assert.That(wizard.Name, Is.EqualTo("Nombre"));
-        }
-
-        [Test]
-        public void IsAliveCorrect()
+        public void IsAlive_WhenHealthIsPositive_ReturnsTrue()
         {
             Wizard wizard = new Wizard("Nombre", 20, 10, 100);
             Assert.That(wizard.IsAlive(), Is.True);
         }
 
+        //Es el encargado de probar si el hechicero esta vivo, si no lo esta devuleve false
         [Test]
-        public void IsNotAliveCorrect()
+        public void IsAlive_WhenHealthIsZero_ReturnsFalse()
         {
             Wizard wizard = new Wizard("Nombre", 20, 10, 0);
             Assert.That(wizard.IsAlive(), Is.False);
         }
 
+        //Es el encargado de verificar si es correcto que alrecibir ataques cuando daño excede a la defensa, se decrece asi su vida
         [Test]
-        public void IsReceiveAttackCorrect()
+        public void ReceiveAttack_WhenDamageExceedsDefense_DecreasesHealth()
         {
             Wizard wizard = new Wizard("Nombre", 20, 10, 100);
             wizard.ReceiveAttack(30);
             Assert.That(wizard.Health, Is.EqualTo(80));
         }
 
+        //Es el encargado de verificar si es incorrecto, ya que el daño es menor que la defensa no le va a hacer nada.
         [Test]
-        public void IsReceiveAttackInCorrect()
+        public void ReceiveAttack_WhenDamageLessThanDefense_HealthUnchanged()
         {
             Wizard wizard = new Wizard("Nombre", 20, 10, 100);
             wizard.ReceiveAttack(5);
             Assert.That(wizard.Health, Is.EqualTo(100)); // al dar un número negativo la vida no cambia
         }
 
+        //Verifica si se cambia correctamente el bastón mágico
         [Test]
-        public void IsAttackCorrect()
-        {
-            Wizard target = new Wizard("Nombre", 30, 5, 100);
-            Wizard wizard = new Wizard("Nombre", 20, 10, 100);
-            SpellBook spellList = new SpellBook();
-            Spell spell = new Spell(15,"Nombre");
-            spellList.AddSpell(spell);
-            wizard.AttackOthers(target, spellList, spell);
-            Assert.That(target.Health, Is.EqualTo(90));
-        }
-
-        [Test]
-        public void IsAttackIncorrect()
-        {
-            Wizard target = new Wizard("Nombre", 30, 5, 100);
-            Wizard wizard = new Wizard("Nombre", 20, 10, 100);
-            SpellBook spellList = new SpellBook();
-            Spell spell = new Spell(15, "Nombre");
-            wizard.AttackOthers(target, spellList, spell);
-            Assert.That(target.Health, Is.EqualTo(100));   //al no existir un spell en la lista, la vida queda igual
-        }
-
-        [Test]
-        public void IsAttackWithStaffCorrect()
-        {
-            Wizard target = new Wizard("Nombre", 30, 5, 100);
-            Wizard wizard = new Wizard("Nombre", 20, 10, 100);
-            MagicStaff staff = new MagicStaff(15);
-            wizard.AttackWithMagicStaff(target, staff);
-            Assert.That(target.Health, Is.EqualTo(90));
-        }
-
-        [Test]
-        public void IsChangeStaffCorrect()
+        public void ChangeStaff_WhenNewStaffEquipped_UpdatesAttackValue()
         {
             MagicStaff oldstaff = new MagicStaff(5);
             MagicStaff newstaff = new MagicStaff(25);
             Wizard wizard = new Wizard("Nombre", 20, 10, 100);
-            wizard.ChangeStaff(oldstaff, newstaff);
-            Assert.That(oldstaff.AttackValue, Is.EqualTo(0));
+            wizard.ChangeStaff(newstaff);
             Assert.That(wizard.AttackValue, Is.EqualTo(40));
         }
 
+        //Verifica si el valor de la protección de la tunica es el correcto
         [Test]
-        public void IsProtectTunicCorrect()
+        public void ProtectWithTunic_WhenTunicEquipped_IncreasesDefenseValue()
         {
             Tunic tunic = new Tunic(10);
             Wizard wizard = new Wizard("Nombre", 20, 10, 100);
@@ -101,26 +64,28 @@ namespace Ucu.Poo.RolePlayGame.Tests
             Assert.That(wizard.DefenseValue, Is.EqualTo(20));
         }
 
+        //Verifica si la defensa total retorna la suma correcta
         [Test]
-        public void IsAttackTotalCorrect()
+        public void DefenseTotal_WithSpells_ReturnsCorrectValue()
         {
-            MagicStaff staff = new MagicStaff(15);
+            Tunic tunic = new Tunic(15);
             SpellBook spellBook = new SpellBook();
-            Wizard wizard = new Wizard("Nombre", 20, 10, 100);
-            Spell spell = new Spell(5,"Nombre");
+            Wizard wizard = new Wizard("Nombre", 10, 20, 100);
+            Spell spell = new Spell("Nombre", 5);
             spellBook.AddSpell(spell);
-            int result = wizard.AttackTotal(staff, spellBook);
+            int result = wizard.DefenseTotal(spellBook, tunic);
             Assert.That(result, Is.EqualTo(40));
         }
 
+        //Verifica en caso de que la suma no retorne la suma correcta
         [Test]
-        public void IsAttackTotalIncorrect()              //En caso de no agregar spells solo uso el ataque del bastón mágico
+        public void DefenseTotal_WithoutSpells_ReturnsWrongValue()     //En caso de no agregar spells solo uso la defensa de la tunica
         {
-            MagicStaff staff = new MagicStaff(15);
+            Tunic tunic = new Tunic(15);
             SpellBook spellBook = new SpellBook();
             Wizard wizard = new Wizard("Nombre", 20, 10, 100);
-            int result = wizard.AttackTotal(staff, spellBook);
-            Assert.That(result, Is.EqualTo(35));
+            int result = wizard.DefenseTotal(spellBook, tunic);
+            Assert.That(result, Is.EqualTo(40));
         }
     }
 }

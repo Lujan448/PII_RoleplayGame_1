@@ -1,5 +1,5 @@
 using Spells;
-using SpellBooks;
+using Wizards;
 using NUnit.Framework;
 
 namespace SpellBookTests
@@ -9,30 +9,31 @@ namespace SpellBookTests
     {
         //HasSpell devuelve false si no se agregó el spell a la lista
         [Test]
-        public void HasSpellReturnsFalseIfSpellNotAdded()
+        public void HasSpell_ReturnsFalse_IfSpellNotAdded()
         {
             SpellBook book = new SpellBook();
-            Spell spell = new Spell(50, "Nombre");
+            Spell spell = new Spell("Nombre", 10);
             Assert.That(book.HasSpell(spell), Is.False);
         }
 
         //AddSpell y HasSpell se verifican juntos, ya que los métodos depende del otro para que funcionen y de correcto
         [Test]
-        public void HasSpellReturnsTrueAfterAddSpell()
+        public void HasSpell_ReturnsTrue_AfterAddSpell()
         {
             SpellBook book = new SpellBook();
-            Spell spell = new Spell(50, "Nombre");
+            Spell spell = new Spell("Nombre", 10);
             book.AddSpell(spell);
             Assert.That(book.HasSpell(spell), Is.True);
         }
 
+        //Lo que se hace es verificar si el total es correcto.
         [Test]
-        public void TotalSpellAttackReturnsCorrectSum()
+        public void TotalSpellDefense_ReturnsCorrectSum()
         {
             SpellBook book = new SpellBook();
-            Spell spell = new Spell(50, "Nombre");
+            Spell spell = new Spell("Nombre",10);
             book.AddSpell(spell);
-            Assert.That(book.TotalSpellAttack(), Is.EqualTo(50));
+            Assert.That(book.TotalSpellDefense(), Is.EqualTo(50));
         }
     }
 }

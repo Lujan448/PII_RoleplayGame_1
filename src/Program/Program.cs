@@ -50,12 +50,12 @@ namespace Program
             
 
             Console.WriteLine("--- ESTADO INICIAL ---");
-            Console.WriteLine($"{legolas.Name} tiene {legolas.Health} HP");
+            Console.WriteLine($"{legolas.Name} tiene {legolas.Health} de vida");
             
 
-            Console.WriteLine($"{gimli.Name} tiene {gimli.Health} HP");
-            Console.WriteLine($"{robin.Name} tiene {robin.Health} HP");
-            Console.WriteLine($"{snape.Name} tiene {snape.Health} HP\n");
+            Console.WriteLine($"{gimli.Name} tiene {gimli.Health} de vida");
+            Console.WriteLine($"{robin.Name} tiene {robin.Health} de vida");
+            Console.WriteLine($"{snape.Name} tiene {snape.Health} de vida\n");
 
         
             //Nosotros queríamos que se pelearan unos entre otros, por ejemplo que el dwarf se pelee con el archer, pero
@@ -63,20 +63,20 @@ namespace Program
             //y las pruebas correspondientes para ellos para que se viera el funcionamiento y cumplimiento de la letra.
 
             Console.WriteLine("--- SIMULACIÓN DE COMBATE ---");
-            Elf dobby = new Elf("Dooby", 2, 5);
+            Elf dobby = new Elf("Dobby", 2, 5);
             //El duende se va a encargar de atacar al elfo
             gimli.AttackElfs(dobby, axe);
-            Console.WriteLine($"La vida de {dobby.Name} bajó a: {dobby.Health} HP\n");
+            Console.WriteLine($"La vida de {dobby.Name} bajó a: {dobby.Health} de vida\n");
 
             Console.WriteLine("--- SIMULACIÓN DE CURACIÓN ---");
             //El elfo Legolas se va a encargar de curar al elfo Dobby
             legolas.ThrowPotion(potion, dobby, inventory);
-            Console.WriteLine($"La vida de {dobby.Name} vuelve a ser: {dobby.Health} HP\n");
+            Console.WriteLine($"La vida de {dobby.Name} vuelve a ser: {dobby.Health} de vida\n");
 
             //Lo que va a mostrar es el resultado total del ataque
             Console.WriteLine("--- TOTAL DE VALOR DE ATAQUE ---");
             int totalAttack = robin.AttackTotal(dagger, bow);
-            Console.WriteLine($"El valor de ataque total que tiene {robin.Name} es: {totalAttack}");
+            Console.WriteLine($"El valor de ataque total que tiene {robin.Name} es: {totalAttack}\n");
 
             //Lo que va a mostrar es el resultado total de la defensa
             Console.WriteLine("--- TOTAL DE VALOR DE DEFENSA ---");

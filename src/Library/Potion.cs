@@ -1,5 +1,7 @@
 //Es la clase experta de la información que corresponde a las pociones
-
+//Se aplica SRP separándola de Elf, ya que si la lógica de las pociones viviera dentro de Elf,
+//esa clase tendría más de una razón de cambio.
+//De esta forma, cualquier modificación relacionada a las pociones se realiza únicamente acá.
 namespace Elfs
 {
     public class Potion

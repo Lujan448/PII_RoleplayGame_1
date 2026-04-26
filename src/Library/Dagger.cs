@@ -1,4 +1,7 @@
 //Es la clase experta de la información que corresponde a la daga.
+//Se aplica SRP separándola de Archer, ya que si la lógica de la daga viviera dentro de Archer,
+//esa clase tendría más de una razón de cambio.
+//De esta forma, cualquier modificación relacionada al daga se realiza únicamente acá.
 
 namespace Archers
 {

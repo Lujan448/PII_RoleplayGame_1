@@ -1,5 +1,7 @@
 //Es la clase experta de la información que corresponde a el bastón mágico
-
+//Se aplica SRP separándola de Wizard, ya que si la lógica del bastón mágico viviera dentro de Wizard,
+//esa clase tendría más de una razón de cambio.
+//De esta forma, cualquier modificación relacionada al bastón se realiza únicamente acá.
 namespace Wizards
 {
     public class MagicStaff

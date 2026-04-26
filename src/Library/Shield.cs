@@ -1,5 +1,7 @@
 //Es la clase experta de la información que corresponde a el escudo.
-
+//Se aplica SRP separándola de Dwarf, ya que si la lógica del escudo viviera dentro de Dwarf,
+//esa clase tendría más de una razón de cambio.
+//De esta forma, cualquier modificación relacionada al escudo se realiza únicamente acá.
 namespace Dwarfs
 {
 public class Shield

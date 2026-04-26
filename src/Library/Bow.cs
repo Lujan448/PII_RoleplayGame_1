@@ -1,4 +1,7 @@
 //Es la clase experta de la información que corresponde a el arco.
+//Se aplica SRP separándola de Archer, ya que si la lógica del arco viviera dentro de Archer,
+//esa clase tendría más de una razón de cambio.
+//De esta forma, cualquier modificación relacionada al arco se realiza únicamente acá.
 
 namespace Archers
 {

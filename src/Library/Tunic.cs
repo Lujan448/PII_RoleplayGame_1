@@ -23,16 +23,8 @@ namespace Tunics
 
          public void RemoveTunic()
         {
-            if(this.AttackValue > 0)
-            {
-                this.AttackValue = 0;
-            }
-        }
-
-        public int DefenseTotal()
-        {
-            int totalDefense = this.DefenseValue;
-            return totalDefense;
+            this.AttackValue = 0;
+            this.DefenseValue = 0;
         }
     }
 }

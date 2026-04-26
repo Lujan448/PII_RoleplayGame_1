@@ -1,108 +1,126 @@
-using System;
-using System.Diagnostics;
-using System.Diagnostics.Contracts;
-using System.Reflection;
-using System.Runtime.Intrinsics.X86;
+using System.Reflection.Metadata;
+using System.Security.Cryptography;
+using System.Linq;
+using Elfs;
 
-namespace Ucu.Poo.RolePlayGame
+//Es la clase Experta, ya que se encarga de conocer todas las responsabilidades que tiene Dwarf 
+//y los comportamientos que va a realizar son a partir del conocimiento de cada una de estas responsabilidades.
+namespace Dwarfs
 {
-public class Dwarf
-{
-//atributos:, nombre, vida, atk inicial, def inicial
-
-private string name;
-public string Name
-        {
-            get {return name;}
-        }
-
-
-private int health;
-public int Health
+    public class Dwarf
     {
-        get { return health; }
-        set { health = value; }
-    }
-private int BaseAtk;
-private int BaseDef;
-private Axe axe;
-private Shield shield;
+        //Iniciamos cada uno de las responsabiliades de conocer a la clase Dwarf.
+        //Su nombre, valor de ataque, de defensa y su vida.
+        private string name;
+        public string Name 
+        { 
+            get {return name; } set {name = value; } 
+        }
 
-public int Atk
-        {
-            get
+        private int attackValue;
+        public int AttackValue 
+        { 
+            get {return attackValue; } set {attackValue = value;} 
+        }
+
+        private int defenseValue;
+        public int DefenseValue 
+        { 
+            get {return defenseValue; } set { defenseValue = value;}
+        }
+
+        //En este caso agregamos un máximo de vida ya que nosotros entendimos por la letra de que debe existir un limite
+        //en la vida, más que nada cuando se aplican en algún punto las curaciones, no podes tener más de 100.
+        private int maxHealth;
+        private int health;
+        public int Health 
+        { 
+            get {return health; } 
+            set 
             {
-                int total = BaseAtk;
-                if (axe != null)
+                if (value < 0)
                 {
-                    total += axe.Damage;  
+                    health = 0;
                 }
-            return total;
-            }       
-        }
-public int Def
-        {
-            get
-            {
-                int total = BaseDef;
-                if (shield != null)
+                else if (value > maxHealth)
                 {
-                    total += shield.Defense;
+                    health = maxHealth;
                 }
-            return total;
-
-            }
-        }
-public bool IsAlive
-        {
-            get {return this.Health > 0;}
+                else
+                {
+                    health = value;
+                }
+            } 
         }
 
-
-//constructor
-
-public Dwarf (string name, int BaseAtk, int BaseDef)
+        //método constructor.
+        public Dwarf(string name, int attackValue, int defenseValue, int health = 100)
         {
-            this.name = name;
-            this.health = 100;
-            this.BaseAtk= BaseAtk;
-            this.BaseDef = BaseDef;
-            this.axe = null;
-            this.shield = null;
+            this.Name = name;
+            this.AttackValue = attackValue;
+            this.DefenseValue = defenseValue;
+            this.Health = health;
+            this.maxHealth = health;
         }
 
-
-//metodos: recive ataque, ataque 
-public void EquipAxe (Axe axe)
+        //Nos pareció bueno verificar si el personaje estaba vivo, en caso de que lo este devuelve un valor booleano
+        public bool IsAlive()
         {
-            this.axe=axe;
-        }
-public void EquipShield (Shield shield)
-        {
-            this.shield= shield;
-        }
-public void ReceiveAttack (int enemyAtk )
-        {
-            int damage = enemyAtk - this.Def;
-
-            if (damage < 0)
-            {
-                damage = 0;
-            }
-
-            this.health -= damage;
-            if (this.health < 0)
-            {
-                this.health = 0;
-            }
-
-
-        }
-public void Attack (Dwarf enemy)
-        {
-            enemy.ReceiveAttack(this.Atk);
+            return this.Health > 0;
         }
     
-}
+        public void ReceiveAttack(int attackValue)
+        {
+            int damage = attackValue - this.DefenseValue;
+            if (damage > 0) 
+            {
+                this.Health -= damage;
+            }
+        }
 
+        //Elegimos que el que se encargue de atacar sea el enano, ya que por letra se entendia
+        //que era el más preparado para pelear.
+        //Hicimos un método especifico para que ataque un elfos, ya que no nos dejaba que el elfo curara
+        //a otros personajes por fuera de los elfos. La unica forma que dejaba es que agregaramos el método
+        //HealCompleatly(), perteneciente a los elfos, a cada una de las clases, sin embargo, por letra nosotros entendimos
+        //que ese método era perteneciente a la clase Elf únicamente.
+
+        public void AttackElfs(Elf target, Axe axe)
+        {
+            target.ReceiveAttack(axe.AttackValue);
+        }
+
+        //En los siguientes dos métodos lo que se hace es poder cambiar el arma que tienen por uno nuevo
+        //En este caso lo pusimos en esta clase porque nos parecia que era la Experta de la información para poder realizar
+        //las responsabilidades correspondientes y además porque por más que las clase Axe o Shield de manera individual pueden 
+        //cumplir con estas responsabilidades, pasa que logicamente no tiene sentido, no se cambia un item solo,
+        //es el personaje el que cambia el item por otro.
+        public void ChangeAxe(Axe newAxe)
+        {
+            this.AttackValue = newAxe.AttackValue;  
+        }
+
+        public void ChangeShield(Shield newShield)
+        {
+            this.DefenseValue = newShield.DefenseValue;   
+        }
+
+
+        //En los siguientes dos métodos lo que se hace es poder remover el arma que tiene
+        //En este caso lo pusimos en esta clase porque nos parecia que era la Experta de la información para poder realizar
+        //las responsabilidades correspondientes y además porque por más que las clase Axe o Shield de manera individual pueden 
+        //cumplir con estas responsabilidades, pasa que logicamente no tiene sentido, no se saca un item solo,
+        //es el personaje el que saca el item.
+        public void RemoveAxe()
+        {
+            this.AttackValue = 0;
+            this.DefenseValue = 0;
+        }
+
+        public void RemoveShield()
+        {
+            this.AttackValue = 0;
+            this.DefenseValue = 0;
+        }
+    }
 }

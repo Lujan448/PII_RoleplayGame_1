@@ -26,12 +26,13 @@ namespace Potions
         {
             get {return healingPower; } set {healingPower = value;}
         }
-        public Potion(int AttackValue, string Name, int HealingPower = 40)
+
+        public Potion(string name, int healingPower)
         {
-            this.AttackValue = AttackValue;
+            this.AttackValue = 0;
             this.DefenseValue = 0;
-            this.Name = Name;
-            this.HealingPower = HealingPower;
+            this.Name = name;
+            this.HealingPower = healingPower;
         }
     }
 }

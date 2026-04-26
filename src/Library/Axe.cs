@@ -1,10 +1,12 @@
-using System;
+//Es la clase experta de la información que corresponde a el hacha
 
-namespace Axes
+namespace Dwarfs
 
 {
     public class Axe
     {
+        //Se inicializan aquellas responsabilidades de conocer de la clase Axe
+        //Valor de ataque y de defensa.
         private int attackValue;
         public int AttackValue 
         { 
@@ -17,19 +19,12 @@ namespace Axes
             get {return defenseValue; } set { defenseValue = value;}
         }
 
-
+        //Ceamos al constructor 
+        //En este caso como es un arma, su valor de defensa va a ser 0.
         public Axe(int AttackValue)
         {
             this.AttackValue = AttackValue;
             this.DefenseValue = 0;
-        }
-
-        public void RemoveAxe()
-        {
-            if(this.AttackValue > 0)
-            {
-                this.AttackValue = 0;
-            }
         }
     }      
 }

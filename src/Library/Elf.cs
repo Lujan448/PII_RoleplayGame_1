@@ -25,6 +25,8 @@ namespace Elfs
         { 
             get {return defenseValue; } set { defenseValue = value;}
         }
+
+        private int maxHealth;
         private int health;
         public int Health 
         { 
@@ -34,6 +36,10 @@ namespace Elfs
                 if (value < 0)
                 {
                     health = 0;
+                }
+                else if (value > maxHealth)
+                {
+                    health = maxHealth;
                 }
                 else
                 {
@@ -49,6 +55,7 @@ namespace Elfs
             this.AttackValue = attackValue;
             this.DefenseValue = defenseValue;
             this.Health = health;
+            this.maxHealth = health;
         }
 
         public bool IsAlive()
@@ -65,29 +72,19 @@ namespace Elfs
             }
         }
 
-        public void AttackOthers(Elf target, Spear spear)
-        {
-            target.ReceiveAttack(spear.AttackValue);
-        }
-
         public void ChangeSpear(Spear newSpear)
         {
             this.AttackValue = newSpear.AttackValue;
-            this.DefenseValue = newSpear.DefenseValue;
         }
         
-        public void HealCompletely() => this.Health = 100;
+        public void HealCompletely() => this.Health = maxHealth;
 
-        public void ReceiveHealing(int points)
-        {
-            this.Health += points; // el setter ya se encarga de no pasar de 0
-        }
-
+        //Es el encargado de curar a alguien y que le quede su vida inicial
         public void ThrowPotion(Potion potion, Elf target, PotionInventory inventory)
         {
             if (inventory.HasPotion(potion))
             {
-                target.ReceiveHealing(potion.HealingPower);
+                target.HealCompletely();
                 inventory.RemovePotion(potion);
             }
         }

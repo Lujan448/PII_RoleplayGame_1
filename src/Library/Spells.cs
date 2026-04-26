@@ -21,10 +21,10 @@ namespace Spells
             get {return name; } set {name = value;}
         }
 
-        public Spell(int AttackValue, string Name)
+        public Spell(string Name, int DefenseValue)
         {
-            this.AttackValue = AttackValue;
-            this.DefenseValue = 0;
+            this.AttackValue = 0;
+            this.DefenseValue = DefenseValue;
             this.Name = Name;
         }
     }

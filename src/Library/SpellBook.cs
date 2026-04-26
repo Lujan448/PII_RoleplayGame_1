@@ -17,12 +17,12 @@ namespace SpellBooks
             return spellList.Contains(spell);
         }
 
-        public int TotalSpellAttack()
+        public int TotalSpellDefense()
         {
             int total = 0;
             foreach (Spell spell in spellList)
             {
-                total += spell.AttackValue;
+                total += spell.DefenseValue;
             }
             return total;
         }

@@ -28,6 +28,7 @@ namespace Ucu.Poo.RolePlayGame
             get {return defenseValue; } set { defenseValue = value;}
         }
 
+        private int maxHealth;
         private int health;
         public int Health 
         { 
@@ -37,6 +38,10 @@ namespace Ucu.Poo.RolePlayGame
                 if (value < 0)
                 {
                     health = 0;
+                }
+                else if (value > maxHealth)
+                {
+                    health = maxHealth;
                 }
                 else
                 {
@@ -52,6 +57,7 @@ namespace Ucu.Poo.RolePlayGame
             this.AttackValue = attackValue;
             this.DefenseValue = defenseValue;
             this.Health = health;
+            this.maxHealth = health;
         }
         public bool IsAlive()
         {
@@ -67,11 +73,12 @@ namespace Ucu.Poo.RolePlayGame
             }
         }
 
-        public void AttackOthers(Wizard target, SpellBook book, Spell spell)
+        //Es el encargado de poder aumentar su defensa con hechizos, es el único hechizo existente hasta ahora.
+        public void DefendWithSpell(SpellBook book, Spell spell)
         {
             if(book.HasSpell(spell))
             {
-                target.ReceiveAttack(spell.AttackValue);
+                this.DefenseValue += spell.DefenseValue;
             } 
         }
 
@@ -82,8 +89,13 @@ namespace Ucu.Poo.RolePlayGame
 
         public void ChangeStaff(MagicStaff newStaff)
         {
-            this.AttackValue = newStaff.AttackValue;
-            this.DefenseValue = newStaff.DefenseValue;   
+            this.AttackValue = newStaff.AttackValue;  
+        }
+
+        public void ChangeTunic(Tunic newTunic)
+        {
+            this.DefenseValue = newTunic.DefenseValue;
+            
         }
 
         public void ProtectWithTunic(Tunic tunic)
@@ -91,11 +103,20 @@ namespace Ucu.Poo.RolePlayGame
             this.DefenseValue += tunic.DefenseValue;
         }
 
-        public int AttackTotal(MagicStaff staff, SpellBook book)
+        //Aunque no es el encargado de calcular el total de ataque,
+        //nos parecía bueno calcularselo porque tiene bastantes acciones de ataque también.
+        public int AttackTotal(MagicStaff staff)
         {
-            int totalSpellAttack = book.TotalSpellAttack();
-            int totalAttack = this.AttackValue + staff.AttackValue + totalSpellAttack;
+            int totalAttack = this.AttackValue + staff.AttackValue;
             return totalAttack;
+        }
+
+        //Es el encargado de calcular el total de valor de defensa que tiene el personaje.
+        public int DefenseTotal(SpellBook book, Tunic tunic)
+        {
+            int totalSpellDefense = book.TotalSpellDefense();
+            int totalDefense = this.DefenseValue + tunic.DefenseValue + totalSpellDefense;
+            return totalDefense;
         }
     }
 }

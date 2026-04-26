@@ -1,18 +1,30 @@
-using System;
+//Es la clase experta de la información que corresponde a el escudo.
 
-namespace Ucu.Poo.RolePlayGame
+namespace Dwarfs
 {
 public class Shield
     {
-        private int defense;
-        
-        public int Defense
+        //Se inicializan aquellas responsabilidades de conocer de la clase Shield
+        //Valor de ataque y de defensa.
+        private int attackValue;
+        public int AttackValue 
         {
-            get{ return defense;}
+            get {return attackValue; }
+            set {attackValue = value;} 
         }
-        public Shield (int defense)
+
+        private int defenseValue;
+        public int DefenseValue 
         {
-            this.defense= defense;
+            get {return defenseValue; } set {defenseValue = value; } 
+        }
+
+        //Ceamos al constructor 
+        //En este caso como es parte de la armadura en si, su valor de ataque va a ser 0.
+        public Shield(int DefenseValue)
+        {
+            this.AttackValue = 0;
+            this.DefenseValue = DefenseValue;
         }
     }
 }

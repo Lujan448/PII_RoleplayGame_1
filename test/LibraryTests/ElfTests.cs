@@ -1,7 +1,7 @@
 using NUnit.Framework;
 using Elfs;
 
-namespace Elftests
+namespace ElfTests
 {
     [TestFixture]
     public class ElfTests

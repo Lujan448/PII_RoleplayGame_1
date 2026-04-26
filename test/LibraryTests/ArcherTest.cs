@@ -1,8 +1,7 @@
-using System.Reflection;
 using NUnit.Framework;
 using Archers;
 
-namespace Ucu.Poo.RolePlayGame.Tests
+namespace ArchersTests
 {
     [TestFixture]
     public class ArcherTest

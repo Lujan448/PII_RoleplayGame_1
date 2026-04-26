@@ -55,8 +55,8 @@ namespace Archers
             this.Name = name;
             this.AttackValue = attackValue;
             this.DefenseValue = defenseValue;
-            this.Health = health;
             this.maxHealth = health;
+            this.Health = health;
         }
 
         //Nos pareció bueno verificar si el personaje estaba vivo, en caso de que lo este devuelve un valor booleano.

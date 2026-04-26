@@ -114,3 +114,7 @@ namespace Archers
         }
     }  
 }
+
+
+//Por las dudas agregamos otro personaje porque somos cuatro personas
+//asi seguiamos la letra y cada uno podía hacer un personaje
